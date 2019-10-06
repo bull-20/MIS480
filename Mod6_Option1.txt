@@ -1,0 +1,209 @@
+'Delete Rows
+    
+    If Left(Range("A1").Value, 3) = "Pri" Then
+
+        Range("1:3,5:5").Select
+        Range("A5").Activate
+        Selection.Delete Shift:=xlUp
+
+    Else
+    End If
+
+'Delete Columns
+
+    If Left(Range("A1").Value, 3) = "App" Then
+
+        Sheets("Sheet1").Range("A:C,E:F,I:I,K:K,M:M,O:O,Q:Q").EntireColumn.Delete
+    
+    Else
+    End If
+
+'Formatting
+    
+    If ActiveSheet.AutoFilterMode Then
+
+    ActiveCell.CurrentRegion.Select
+    
+    Selection.Font.Bold = True
+    With Selection.Font
+        .Name = "Arial"
+        .Size = 12
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontNone
+    End With
+
+    With Selection
+        .WrapText = False
+        .Orientation = 0
+        .AddIndent = False
+        .IndentLevel = 0
+        .ShrinkToFit = False
+        .ReadingOrder = xlContext
+        .MergeCells = False
+    End With
+
+    With Selection.Borders(xlEdgeLeft)
+        .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+    With Selection.Borders(xlEdgeTop)
+        .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+    With Selection.Borders(xlEdgeBottom)
+       .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+    With Selection.Borders(xlEdgeRight)
+        .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+    With Selection.Borders(xlInsideVertical)
+        .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+    With Selection.Borders(xlInsideHorizontal)
+        .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+    Cells.Select
+    Cells.EntireColumn.AutoFit
+
+    Else
+
+    ActiveCell.CurrentRegion.Select
+    Selection.AutoFilter
+    
+    Selection.Font.Bold = True
+    With Selection.Font
+        .Name = "Arial"
+        .Size = 12
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontNone
+    End With
+    With Selection
+        .WrapText = False
+        .Orientation = 0
+        .AddIndent = False
+        .IndentLevel = 0
+        .ShrinkToFit = False
+        .ReadingOrder = xlContext
+        .MergeCells = False
+    End With
+    With Selection.Borders(xlEdgeLeft)
+        .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+    With Selection.Borders(xlEdgeTop)
+        .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+    With Selection.Borders(xlEdgeBottom)
+       .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+    With Selection.Borders(xlEdgeRight)
+        .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+    With Selection.Borders(xlInsideVertical)
+        .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+    With Selection.Borders(xlInsideHorizontal)
+        .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+    Cells.Select
+    Cells.EntireColumn.AutoFit
+
+    End If
+    
+    Range("A2").Select
+    Range(Selection, ActiveCell.SpecialCells(xlLastCell)).Select
+    Selection.AutoFilter Field:=6, Criteria1:=Array( _
+        "Criteria 1", "Criteria 2", "="), Operator:=xlFilterValues
+    Selection.SpecialCells(xlCellTypeVisible).Select
+    Selection.EntireRow.Delete
+    Selection.AutoFilter Field:=6
+
+'Replace Text
+
+    Cells.Replace What:="0001", Replacement _
+        :="1", LookAt:=xlPart, SearchOrder:=xlByRows, MatchCase:=False, _
+        SearchFormat:=False, ReplaceFormat:=False
+    Cells.Replace What:="0002", Replacement _
+        :="2", LookAt:=xlPart, SearchOrder:=xlByRows, MatchCase:=False, _
+        SearchFormat:=False, ReplaceFormat:=False
+    Cells.Replace What:="ORGANIZATION 01", Replacement _
+        :="01 ORG", LookAt:=xlPart, SearchOrder:=xlByRows, MatchCase:=False, _
+        SearchFormat:=False, ReplaceFormat:=False
+    Cells.Replace What:="ORGANIZATION 02", Replacement _
+        :="02 ORG", LookAt:=xlPart, SearchOrder:=xlByRows, MatchCase:=False, _
+        SearchFormat:=False, ReplaceFormat:=False
+
+    
+    With ActiveWindow
+        .SplitColumn = 0
+        .SplitRow = 1
+    End With
+    ActiveWindow.FreezePanes = True
+    
+' Rename Sheet1 Tab
+If Sheets(1).Name = "Sheet1" Then
+
+    Sheets("Sheet1").Select
+    Sheets("Sheet1").Name = "Name 1"
+    
+Else
+End If
+
+'AutoFilter
+Sheets("Name 1").Select
+Selection.Activate
+Cells.EntireColumn.AutoFit
+
+' DateFormat Macro
+
+    Columns("A:A").Select
+    Selection.NumberFormat = "mm/dd/yyyy"
+    Selection.TextToColumns Destination:=Range("A1"), DataType:=xlDelimited, _
+        TextQualifier:=xlDoubleQuote, ConsecutiveDelimiter:=False, Tab:=False, _
+        Semicolon:=False, Comma:=False, Space:=False, Other:=False, FieldInfo _
+        :=Array(1, 3), TrailingMinusNumbers:=True
